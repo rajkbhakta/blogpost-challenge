@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  display:flex;
+  display: flex;
   height: 50px;
 
   justify-content: center;
@@ -8,8 +8,13 @@
   box-shadow: 5px 5px 10px gray;
 }
 * {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
+}
+.layout {
+  display: flex;
+  flex-direction: column;
+
 }
 
 .navlink-container {
@@ -17,14 +22,13 @@
   justify-content: space-around;
   align-items: center;
   width: 400px;
-
 }
-.navlink  {
-padding-top:10px;
-list-style: none;
+.navlink {
+  padding-top: 10px;
+  list-style: none;
 }
 
-.navlink a  {
+.navlink a {
   text-decoration: none;
   list-style: none;
   color: black;

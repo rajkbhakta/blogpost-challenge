@@ -16,7 +16,7 @@ Posts.init(
       allowNull:false,
       primaryKey:true,
     },
-    Content:{
+    content:{
       type:dataTypes.STRING,
       allowNull:false
     },
