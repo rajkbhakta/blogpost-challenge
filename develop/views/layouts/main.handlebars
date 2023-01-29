@@ -1,0 +1,37 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Registry</title>
+    <link rel="stylesheet" href="/css/jass.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    <header class="display-flex justify-space-between align-center ">
+      <div class="navbar">
+        <ul class="navlink-container">
+          {{#if loggedin}}
+            <li class="navlink"><a href="/">Home</a></li>
+            <li class="navlink"><a href="/dashboard">Dashboard</a></li>
+            <li class="navlink"><a href="/login">Login</a></li>
+            <li class="navlink"><a href="/logout">Logout</a></li>
+          {{else}}
+            <li class="navlink"><a href="/">Home</a></li>
+
+            <li class="navlink"><a href="/login">Login</a></li>
+          {{/if}}
+        </ul>
+      </div>
+    </header>
+    <main class="container container-fluid mt-5">
+      <!-- Render the contents of the sub layout here -->
+      {{{body}}}
+    </main>
+    <footer>
+
+    </footer>
+  </body>
+
+</html>
