@@ -12,26 +12,27 @@
     <header class="display-flex justify-space-between align-center ">
       <div class="navbar">
         <ul class="navlink-container">
-          {{#if loggedin}}
+          {{!-- {{#if loggedin}} --}}
             <li class="navlink"><a href="/">Home</a></li>
             <li class="navlink"><a href="/dashboard">Dashboard</a></li>
             <li class="navlink"><a href="/login">Login</a></li>
-            <li class="navlink"><a href="/logout">Logout</a></li>
-          {{else}}
+            <li class="navlink"><button id="logout" style="border: 0;background:transparent;">Logout</button></li>
+          {{!-- {{else}}
             <li class="navlink"><a href="/">Home</a></li>
-
             <li class="navlink"><a href="/login">Login</a></li>
-          {{/if}}
+          {{/if}} --}}
         </ul>
       </div>
     </header>
     <main class="container container-fluid mt-5">
-      <!-- Render the contents of the sub layout here -->
       {{{body}}}
     </main>
     <footer>
 
     </footer>
+    {{#if loggedIn}}
+      <script src="/javascript/logout.js"></script>
+    {{/if}}
   </body>
 
 </html>

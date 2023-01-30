@@ -1,13 +1,19 @@
 <div>
   <h1>Edit Post</h1>
-  <form>
+  <form class="edit-post-form">
      <div class="layout">
-     <label>Title</label>
-      <input type="text" value={{post.title}}/>
-      <label>Content</label>
-      <input type="textarea" value={{post.content}}/>
+     <label for="post-title">Title</label>
+      <input  id="post-title" name="post-title" type="text" value={{post.title}}/>
+      <label for="post-content">Content</label>
+      <input id="post-content" name="post-content" type="textarea" value={{post.content}}/>
    </div>
-   <button>Edit Post</button>
-   <button>Delete Post</button>
+   <button type="submit">Edit Post</button>
+   <button  class="delete-btn" type="submit">Delete Post</button>
   </form>
 </div>
+
+{{> comments post.comments}}
+
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>
+<script src="/javascript/comment.js"></script>

@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
+
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
+
+// shows all posts of a user 
 router.get('/', withAuth, (req, res) => {
     Post.findAll({
       where: {
@@ -12,13 +14,13 @@ router.get('/', withAuth, (req, res) => {
       attributes: [
         'id',
         'title',
-        'date',
+        'created_at',
         'content'
       ],
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment', 'post_id', 'user_id', 'date'],
+          attributes: ['id', 'comment', 'post_id', 'user_id', 'created_at'],
           include: {
             model: User,
             attributes: ['username']
@@ -49,13 +51,13 @@ router.get('/', withAuth, (req, res) => {
       attributes: [
         'id',
         'title',
-        'date',
+        'created_at',
         'content'
       ],
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment', 'post_id', 'user_id', 'date'],
+          attributes: ['id', 'comment', 'post_id', 'user_id', 'created_at'],
           include: {
             model: User,
             attributes: ['username']
@@ -76,7 +78,7 @@ router.get('/', withAuth, (req, res) => {
         // serialize the data
         const post = data.get({ plain: true });
 
-        res.render('edit-post', {
+        res.render('editpost', {
             post,
             loggedIn: true
             });
@@ -86,23 +88,22 @@ router.get('/', withAuth, (req, res) => {
         res.status(500).json(err);
       });
 });
-
+// routes to create a new post
 router.get('/create/', withAuth, (req, res) => {
     Post.findAll({
       where: {
-        // use the ID from the session
         user_id: req.session.user_id
       },
       attributes: [
         'id',
         'title',
-        'date',
+        'created_at',
         'content'
       ],
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment', 'post_id', 'user_id', 'date'],
+          attributes: ['id', 'comment', 'post_id', 'user_id', 'created_at'],
           include: {
             model: User,
             attributes: ['username']
@@ -115,9 +116,8 @@ router.get('/create/', withAuth, (req, res) => {
       ]
     })
       .then(data => {
-        // serialize data before passing to template
         const posts = data.map(post => post.get({ plain: true }));
-        res.render('create-post', { posts, loggedIn: true });
+        res.render('createpost', { posts, loggedIn: true });
       })
       .catch(err => {
         console.log(err);

@@ -1,35 +1,31 @@
 const router = require('express').Router();
 const {Post, User, Comment}=require('../models')
 
+// route to get all posts for homepage
 router.get('/',(req,res)=> {
   Post.findAll({
     attributes: [
       'id',
-      'tittle',
-      'content',
-      "date",
+      'title',
+      'created_at',
+      'content'
     ],
-    include:[
+    include: [
       {
         model: Comment,
-        attributes: [
-          "id","comment","post_id","user_id"
-        ]
+        attributes: ['id', 'comment', 'post_id', 'user_id', 'created_at'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
       },
       {
-        model:User,
-        attributes:[
-          "username"
-        ]
-
+        model: User,
+        attributes: ['username']
       }
-
     ]
   }).then(data =>{
-
-    const posts = data.map(item=>{
-      item.get({plain:true})
-    })
+    const posts = data.map(item=>item.get({plain:true}))
     res.render('homepage', {
       posts,loggedin:req.session.login
     })
@@ -38,16 +34,15 @@ router.get('/',(req,res)=> {
     res.status(500).json(err)
   })
 })
-
+// route to login
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
-
   res.render('login');
 });
-
+// sign up route
 router.get('/signup', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
@@ -55,7 +50,7 @@ router.get('/signup', (req, res) => {
   }
   res.render('signup');
 });
-
+// route to get single post
 router.get('/post/:id', (req, res) => {
   Post.findOne({
     where: {
@@ -64,13 +59,13 @@ router.get('/post/:id', (req, res) => {
     attributes: [
       'id',
       'title',
-      'date',
+      'created_at',
       'content'
     ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment', 'post_id', 'user_id', 'date'],
+        attributes: ['id', 'comment', 'post_id', 'user_id', 'created_at'],
         include: {
           model: User,
           attributes: ['username']
@@ -87,7 +82,7 @@ router.get('/post/:id', (req, res) => {
         res.status(404).json({ message: 'No post found' });
         return;
       }
-      const post = dbPostData.get({ plain: true });
+      const post = data.get({ plain: true });
       res.render('single-post', {
           post,
           loggedIn: req.session.loggedIn

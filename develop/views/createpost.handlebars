@@ -1,13 +1,15 @@
 <div>
    <h1>new post</h1>
-   <form>
+   <form class="new-post-form">
 
    <div class="layout">
-     <label>Title</label>
-      <input type="text"/>
-      <label>Content</label>
-      <input type="textarea"/>
+     <label for="post-title">Title</label>
+      <input id="post-title" name="post-title" type="text"/>
+      <label for="post-content">Content</label>
+      <input id="post-content" name="post-content" type="textarea"/>
    </div>
    <button>Create Post</button>
    </form>
 </div>
+
+<script src="/javascript/add-post.js"></script>
