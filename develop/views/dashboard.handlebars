@@ -1,0 +1,10 @@
+<div>
+  <h1>Dashboard</h1>
+  {{#if posts.length}}
+</div>
+
+{{#each posts as |post|}}
+{{> post-info post }}
+<a href="/dashboard/edit/{{post.id}}"><button>Edit post</button></a>
+</div>
+{{/each}}
